@@ -13,7 +13,7 @@ module Lawyer
       if params.is_a?(Hash)
         (@name, details) = params.first
         case details
-        when Fixnum
+        when Integer
           @arity = details
         when Array
           @signature = details
