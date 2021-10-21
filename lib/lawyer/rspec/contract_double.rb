@@ -18,7 +18,11 @@ module Lawyer
 
             receiver = allow(the_double).to receive(clause.name).and_return(return_value)
             if clause.arity
-              receiver.with(*clause.arity.times.map { anything })
+              if clause.arity > 0
+                receiver.with(*clause.arity.times.map { anything })
+              elsif clause.arity == 0
+                receiver.with(no_args)
+              end
             elsif clause.signature
               receiver.with(clause.signature.inject({}) do |acc, name|
                   acc[name] = anything
